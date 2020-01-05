@@ -11,10 +11,11 @@ func showAllRanks(jsonString []byte, db *sql.DB) string{
     var name string
     var score int
     var replayData string
+    var time1 string
     fmt.Println(jsonString)
-    rows, err := db.Query("SELECT name, score, replay_data FROM view_ranking")
+    rows, err := db.Query("SELECT name, score, replay_data, time FROM view_ranking")
     if err != nil {
-        log.Fatal(err)
+        log.Fatal("ksoo error", err)
     }
     defer rows.Close()
 
@@ -22,14 +23,16 @@ func showAllRanks(jsonString []byte, db *sql.DB) string{
     containerJson["result"] = 0
     rankData := make([]map[string]interface{}, 0)
     for rows.Next() {
-        err := rows.Scan(&name, &score, &replayData)
+        err := rows.Scan(&name, &score, &replayData, &time1)
         if err != nil {
-            log.Fatal(err)
+            // log.Fatal(err)
+            time1 = ""
         }
         var m = map[string]interface{}{
             "name":name,
             "score":score,
             "replay_data":replayData,
+            "time": time1,
         }
         rankData = append(rankData, m)
     }
