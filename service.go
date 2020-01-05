@@ -20,7 +20,7 @@ func showAllRanks(jsonString []byte, db *sql.DB) string{
     defer rows.Close()
 
     containerJson := make(map[string]interface{}, 0)
-    containerJson["result"] = 0
+    containerJson["result"] = 2
     rankData := make([]map[string]interface{}, 0)
     for rows.Next() {
         err := rows.Scan(&name, &score, &replayData, &time1)

